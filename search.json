@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "team.html",
+    "href": "team.html",
+    "title": "Meet the Team",
+    "section": "",
+    "text": "Joaquin Gonzalez-Salgado\nLinkedIn | GitHub | Portfolio\n\n\n\n\n\nBen Phung\nLinkedIn | GitHub | Portfolio"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "HMC E155 Resources"
+  },
+  {
+    "objectID": "references.html#course-resources",
+    "href": "references.html#course-resources",
+    "title": "References",
+    "section": "",
+    "text": "HMC E155 Resources"
+  },
+  {
+    "objectID": "references.html#e155-development-board",
+    "href": "references.html#e155-development-board",
+    "title": "References",
+    "section": "E155 Development Board",
+    "text": "E155 Development Board\n\nE155 Development Board Schematic\nE155 Breadboard Adapter Schematic\nE155 Development Board BOM"
+  },
+  {
+    "objectID": "references.html#ice40-documentation",
+    "href": "references.html#ice40-documentation",
+    "title": "References",
+    "section": "iCE40 Documentation",
+    "text": "iCE40 Documentation\n\niCE40 UltraPlus Family Data Sheet\niCE40 Oscillator Usage Guide\niCE40 SPRAM Usage Guide\niCE40 Technology Library"
+  },
+  {
+    "objectID": "references.html#stm32-documentation",
+    "href": "references.html#stm32-documentation",
+    "title": "References",
+    "section": "STM32 Documentation",
+    "text": "STM32 Documentation\n\nSTM32L432KC Datasheet\nSTM32L432KC Reference Manual\nSTM32L432KC Programming Manual"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "E155 Final Project",
+    "section": "",
+    "text": "We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board (iCE40 UP5K FPGA + STM32L432KC MCU). Pulling the trigger fires a coded IR packet; when another player’s receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard."
+  },
+  {
+    "objectID": "index.html#project-description",
+    "href": "index.html#project-description",
+    "title": "E155 Final Project",
+    "section": "",
+    "text": "We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board (iCE40 UP5K FPGA + STM32L432KC MCU). Pulling the trigger fires a coded IR packet; when another player’s receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard."
+  },
+  {
+    "objectID": "projectSpecs.html",
+    "href": "projectSpecs.html",
+    "title": "Project Proposal Specs",
+    "section": "",
+    "text": "Bill of materials included with list of all items needed for the project\nProject lists specifications for design\nIdentifies the riskiest element of the project\n\n\n\n\n\nBill of materials includes part numbers, quantities, and prices for all components including shipping and taxes. Prices for components available in the stock room should be indicated as “stockroom”.\nCompletely clear what the project must do to meet specs.\nRough timeline included which lists the tasks which need to be completed, the order in which they will be pursued, the time they are expected to take, and how the tasks will be divided among the team members.\nCalculation of performance critical parameters is present.\nWriting is well organized and no grammar or spelling issues."
+  },
+  {
+    "objectID": "projectSpecs.html#general",
+    "href": "projectSpecs.html#general",
+    "title": "Project Proposal Specs",
+    "section": "",
+    "text": "Bill of materials included with list of all items needed for the project\nProject lists specifications for design\nIdentifies the riskiest element of the project\n\n\n\n\n\nBill of materials includes part numbers, quantities, and prices for all components including shipping and taxes. Prices for components available in the stock room should be indicated as “stockroom”.\nCompletely clear what the project must do to meet specs.\nRough timeline included which lists the tasks which need to be completed, the order in which they will be pursued, the time they are expected to take, and how the tasks will be divided among the team members.\nCalculation of performance critical parameters is present.\nWriting is well organized and no grammar or spelling issues."
+  }
+]
