@@ -1,0 +1,26 @@
+---
+title: "References"
+---
+
+## Course Resources
+
+- [HMC E155 Resources](https://hmc-e155.github.io/resources/)
+
+## E155 Development Board
+
+- [E155 Development Board Schematic](https://hmc-e155.github.io/assets/doc/E155%20Development%20Board%20Schematic.pdf)
+- [E155 Breadboard Adapter Schematic](https://hmc-e155.github.io/assets/doc/E155%20Breadboard%20Adapter%20Schematic.pdf)
+- [E155 Development Board BOM](https://hmc-e155.github.io/assets/doc/E155_v4_Dev_Board_BOM.html)
+
+## iCE40 Documentation
+
+- [iCE40 UltraPlus Family Data Sheet](https://hmc-e155.github.io/assets/doc/FPGA-DS-02008-2-0-iCE40-UltraPlus-Family-Data-Sheet.pdf)
+- [iCE40 Oscillator Usage Guide](https://hmc-e155.github.io/assets/doc/FPGA-TN-02008-1-7-iCE40-Oscillator-Usage-Guide.pdf)
+- [iCE40 SPRAM Usage Guide](https://hmc-e155.github.io/assets/doc/FPGA-TN-02022-1-3-iCE40-SPRAM-Usage-Guide.pdf)
+- [iCE40 Technology Library](https://hmc-e155.github.io/assets/doc/FPGA-TN-02026-3-2-iCE40-Technology-Library.pdf)
+
+## STM32 Documentation
+
+- [STM32L432KC Datasheet](https://hmc-e155.github.io/assets/doc/ds11451-stm32l432kc.pdf)
+- [STM32L432KC Reference Manual](https://hmc-e155.github.io/assets/doc/rm0394-stm32l41xxx42xxx43xxx44xxx45xxx46xxx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)
+- [STM32L432KC Programming Manual](https://hmc-e155.github.io/assets/doc/pm0214-stm32-cortexm4-mcus-and-mpus-programming-manual-stmicroelectronics.pdf)

@@ -1,0 +1,24 @@
+---
+title: "Meet the Team"
+toc: false
+---
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-6 .team-member}
+![](images/headshot-placeholder.svg){.headshot fig-alt="Headshot of Joaquin Gonzalez-Salgado"}
+
+### Joaquin Gonzalez-Salgado
+
+[LinkedIn](https://www.linkedin.com) | [GitHub](https://github.com) | [Portfolio](#)
+:::
+
+::: {.g-col-12 .g-col-md-6 .team-member}
+![](images/headshot-placeholder.svg){.headshot fig-alt="Headshot of Ben Phung"}
+
+### Ben Phung
+
+[LinkedIn](https://www.linkedin.com) | [GitHub](https://github.com) | [Portfolio](#)
+:::
+
+:::

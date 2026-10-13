@@ -1,0 +1,19 @@
+---
+title: "Project Proposal Specs"
+---
+
+## General
+
+### Proficiency
+
+- [ ] Bill of materials included with list of all items needed for the project
+- [ ] Project lists specifications for design
+- [ ] Identifies the riskiest element of the project
+
+### Excellence
+
+- [ ] Bill of materials includes part numbers, quantities, and prices for all components including shipping and taxes. Prices for components available in the stock room should be indicated as "stockroom".
+- [ ] Completely clear what the project must do to meet specs.
+- [ ] Rough timeline included which lists the tasks which need to be completed, the order in which they will be pursued, the time they are expected to take, and how the tasks will be divided among the team members.
+- [ ] Calculation of performance critical parameters is present.
+- [ ] Writing is well organized and no grammar or spelling issues.

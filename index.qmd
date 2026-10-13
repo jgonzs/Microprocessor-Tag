@@ -1,0 +1,9 @@
+---
+title: "E155 Final Project"
+---
+
+## Project Description
+
+### Overview
+
+We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board (iCE40 UP5K FPGA + STM32L432KC MCU). Pulling the trigger fires a coded IR packet; when another player's receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard.
