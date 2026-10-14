@@ -10,7 +10,7 @@ toc: false
 
 ### Joaquin Gonzalez-Salgado
 
-[LinkedIn](https://www.linkedin.com) | [GitHub](https://github.com) | [Portfolio](#)
+[LinkedIn](https://www.linkedin.com/in/joaquin-e-gs/) | [GitHub](https://github.com/jgonzs) | [Portfolio](https://jgonzs.github.io/)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .team-member}

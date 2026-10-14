@@ -2,18 +2,85 @@
 title: "Project Proposal Specs"
 ---
 
-## General
+## IR Implementation
 
 ### Proficiency
 
-- [ ] Bill of materials included with list of all items needed for the project
-- [ ] Project lists specifications for design
-- [ ] Identifies the riskiest element of the project
+- [ ] Each player unit fires a coded IR packet when the trigger is pressed.
+- [ ] FPGA generates a 38 kHz ± 2% IR carrier, verified with an oscilloscope capture.
+- [ ] A player unit registers a hit on its single hit zone when struck by the other player's blaster from at least 5 m indoors.
+- [ ] IR receiver input is passed through a synchronizer before being decoded on the FPGA.
+- [ ] IR decoder rejects packets with invalid timing or check bits.
+- [ ] Hits are not registered from a player's own shots or from stray IR sources (e.g., a TV remote).
+- [ ] IR decoder testbench passes, verifying valid and invalid packets.
 
 ### Excellence
 
-- [ ] Bill of materials includes part numbers, quantities, and prices for all components including shipping and taxes. Prices for components available in the stock room should be indicated as "stockroom".
-- [ ] Completely clear what the project must do to meet specs.
-- [ ] Rough timeline included which lists the tasks which need to be completed, the order in which they will be pursued, the time they are expected to take, and how the tasks will be divided among the team members.
-- [ ] Calculation of performance critical parameters is present.
-- [ ] Writing is well organized and no grammar or spelling issues.
+- [ ] Each player unit has three hit zones, and the FPGA decodes all three IR receivers in parallel.
+- [ ] Hits register from at least 10 m indoors.
+- [ ] Decoder testbench covers the edges of the timing acceptance window and simultaneous packets on multiple receivers.
+
+## Game Logic and Data
+
+### Proficiency
+
+- [ ] Game progresses through start, play, out, and game over states, with a reset returning both units to start.
+- [ ] A valid hit decrements the hit player's health.
+- [ ] SPI interconnect between the MCU and FPGA is wired correctly and transfers hit events (shooter ID, zone) and game state.
+- [ ] MCU handles hit events with an interrupt rather than polling.
+
+### Excellence
+
+- [ ] Hits are scored by zone.
+- [ ] SPI communication between the MCU and FPGA is displayed on the logic analyzer.
+- [ ] Finite state machines are implemented in an appropriate form discussed in lecture: canonical, non-canonical, or communicating.
+
+## Display and Audio Feedback
+
+### Proficiency
+
+- [ ] Indicator LEDs show each player's health and game state, and flash on a valid hit.
+- [ ] Win/lose is shown on each unit at game over.
+- [ ] MCU plays sampled sound effects through its DAC, with sample timing driven by a hardware timer.
+- [ ] A hit sound effect plays on each valid hit.
+
+### Excellence
+
+- [ ] LED display animations are stored in SPRAM and played back on command from the MCU.
+- [ ] Distinct sound effects play for firing, hits, and win/lose.
+
+## Web Server and Scoreboard
+
+### Proficiency
+
+- [ ] MCU sends hit events to the ESP8266 over UART, and the ESP8266 delivers them to the laptop server.
+- [ ] Laptop server logs hit events from both player units.
+
+### Excellence
+
+- [ ] Scoreboard web page displays each player's health, hits by zone, and win/lose, updating within 1 s of a hit.
+- [ ] Games can be started and reset from the scoreboard web page.
+
+## Hardware and Power
+
+### Proficiency
+
+- [ ] Both units run untethered on battery power inside 3D-printed housings with straps.
+- [ ] Logic is broken into modules (e.g., IR transmitter, IR decoder, SPI peripheral, LED driver), with control logic separate from datapath logic.
+
+### Excellence
+
+- [ ] A full 15-minute two-player game runs on battery without resets or dropped hits.
+- [ ] Measured average current per unit is within 20% of the calculated power budget (≈180 mA).
+
+## Midpoint Specifications
+
+Midpoint requirements follow the course's [Project Midpoint Specifications](https://hmc-e155.github.io/project/specs/project-midpoint-specs.html).
+
+## Checkoff Specifications
+
+Final checkoff requirements follow the course's [Project Checkoff Specifications](https://hmc-e155.github.io/project/specs/project-checkoff-specs.html).
+
+## Final Report Specifications
+
+Final report requirements follow the course's [Project Final Report Specifications](https://hmc-e155.github.io/project/specs/project-final-report-specs.html).
