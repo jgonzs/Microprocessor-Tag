@@ -2,31 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jgonzs.github.io/Microprocessor-Tag/team.html</loc>
-    <lastmod>2026-10-13T00:33:29.694Z</lastmod>
+    <lastmod>2026-10-13T01:12:40.213Z</lastmod>
   </url>
   <url>
     <loc>https://jgonzs.github.io/Microprocessor-Tag/references.html</loc>
     <lastmod>2026-10-13T00:33:29.690Z</lastmod>
   </url>
   <url>
-    <loc>https://jgonzs.github.io/Microprocessor-Tag/mcu.html</loc>
-    <lastmod>2026-10-13T00:33:29.688Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jgonzs.github.io/Microprocessor-Tag/fpga.html</loc>
-    <lastmod>2026-10-13T00:33:29.683Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jgonzs.github.io/Microprocessor-Tag/acknowledgements.html</loc>
-    <lastmod>2026-10-13T00:33:29.680Z</lastmod>
+    <loc>https://jgonzs.github.io/Microprocessor-Tag/projectSpecs.html</loc>
+    <lastmod>2026-10-14T05:22:19.250Z</lastmod>
   </url>
   <url>
     <loc>https://jgonzs.github.io/Microprocessor-Tag/index.html</loc>
     <lastmod>2026-10-13T00:33:29.687Z</lastmod>
   </url>
   <url>
-    <loc>https://jgonzs.github.io/Microprocessor-Tag/projectSpecs.html</loc>
-    <lastmod>2026-10-13T00:33:29.689Z</lastmod>
+    <loc>https://jgonzs.github.io/Microprocessor-Tag/acknowledgements.html</loc>
+    <lastmod>2026-10-13T00:33:29.680Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jgonzs.github.io/Microprocessor-Tag/fpga.html</loc>
+    <lastmod>2026-10-13T00:33:29.683Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jgonzs.github.io/Microprocessor-Tag/mcu.html</loc>
+    <lastmod>2026-10-13T00:33:29.688Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jgonzs.github.io/Microprocessor-Tag/proposal.html</loc>
+    <lastmod>2026-10-13T20:43:14.686Z</lastmod>
   </url>
   <url>
     <loc>https://jgonzs.github.io/Microprocessor-Tag/results.html</loc>

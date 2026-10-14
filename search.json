@@ -42,6 +42,69 @@
     "text": "STM32 Documentation\n\nSTM32L432KC Datasheet\nSTM32L432KC Reference Manual\nSTM32L432KC Programming Manual"
   },
   {
+    "objectID": "projectSpecs.html",
+    "href": "projectSpecs.html",
+    "title": "Project Proposal Specs",
+    "section": "",
+    "text": "Each player unit fires a coded IR packet when the trigger is pressed.\nFPGA generates a 38 kHz ± 2% IR carrier, verified with an oscilloscope capture.\nA player unit registers a hit on its single hit zone when struck by the other player’s blaster from at least 5 m indoors.\nIR receiver input is passed through a synchronizer before being decoded on the FPGA.\nIR decoder rejects packets with invalid timing or check bits.\nHits are not registered from a player’s own shots or from stray IR sources (e.g., a TV remote).\nIR decoder testbench passes, verifying valid and invalid packets.\n\n\n\n\n\nEach player unit has three hit zones, and the FPGA decodes all three IR receivers in parallel.\nHits register from at least 10 m indoors.\nDecoder testbench covers the edges of the timing acceptance window and simultaneous packets on multiple receivers."
+  },
+  {
+    "objectID": "projectSpecs.html#ir-implementation",
+    "href": "projectSpecs.html#ir-implementation",
+    "title": "Project Proposal Specs",
+    "section": "",
+    "text": "Each player unit fires a coded IR packet when the trigger is pressed.\nFPGA generates a 38 kHz ± 2% IR carrier, verified with an oscilloscope capture.\nA player unit registers a hit on its single hit zone when struck by the other player’s blaster from at least 5 m indoors.\nIR receiver input is passed through a synchronizer before being decoded on the FPGA.\nIR decoder rejects packets with invalid timing or check bits.\nHits are not registered from a player’s own shots or from stray IR sources (e.g., a TV remote).\nIR decoder testbench passes, verifying valid and invalid packets.\n\n\n\n\n\nEach player unit has three hit zones, and the FPGA decodes all three IR receivers in parallel.\nHits register from at least 10 m indoors.\nDecoder testbench covers the edges of the timing acceptance window and simultaneous packets on multiple receivers."
+  },
+  {
+    "objectID": "projectSpecs.html#game-logic-and-data",
+    "href": "projectSpecs.html#game-logic-and-data",
+    "title": "Project Proposal Specs",
+    "section": "Game Logic and Data",
+    "text": "Game Logic and Data\n\nProficiency\n\nGame progresses through start, play, out, and game over states, with a reset returning both units to start.\nA valid hit decrements the hit player’s health.\nSPI interconnect between the MCU and FPGA is wired correctly and transfers hit events (shooter ID, zone) and game state.\nMCU handles hit events with an interrupt rather than polling.\n\n\n\nExcellence\n\nHits are scored by zone.\nSPI communication between the MCU and FPGA is displayed on the logic analyzer.\nFinite state machines are implemented in an appropriate form discussed in lecture: canonical, non-canonical, or communicating."
+  },
+  {
+    "objectID": "projectSpecs.html#display-and-audio-feedback",
+    "href": "projectSpecs.html#display-and-audio-feedback",
+    "title": "Project Proposal Specs",
+    "section": "Display and Audio Feedback",
+    "text": "Display and Audio Feedback\n\nProficiency\n\nIndicator LEDs show each player’s health and game state, and flash on a valid hit.\nWin/lose is shown on each unit at game over.\nMCU plays sampled sound effects through its DAC, with sample timing driven by a hardware timer.\nA hit sound effect plays on each valid hit.\n\n\n\nExcellence\n\nLED display animations are stored in SPRAM and played back on command from the MCU.\nDistinct sound effects play for firing, hits, and win/lose."
+  },
+  {
+    "objectID": "projectSpecs.html#web-server-and-scoreboard",
+    "href": "projectSpecs.html#web-server-and-scoreboard",
+    "title": "Project Proposal Specs",
+    "section": "Web Server and Scoreboard",
+    "text": "Web Server and Scoreboard\n\nProficiency\n\nMCU sends hit events to the ESP8266 over UART, and the ESP8266 delivers them to the laptop server.\nLaptop server logs hit events from both player units.\n\n\n\nExcellence\n\nScoreboard web page displays each player’s health, hits by zone, and win/lose, updating within 1 s of a hit.\nGames can be started and reset from the scoreboard web page."
+  },
+  {
+    "objectID": "projectSpecs.html#hardware-and-power",
+    "href": "projectSpecs.html#hardware-and-power",
+    "title": "Project Proposal Specs",
+    "section": "Hardware and Power",
+    "text": "Hardware and Power\n\nProficiency\n\nBoth units run untethered on battery power inside 3D-printed housings with straps.\nLogic is broken into modules (e.g., IR transmitter, IR decoder, SPI peripheral, LED driver), with control logic separate from datapath logic.\n\n\n\nExcellence\n\nA full 15-minute two-player game runs on battery without resets or dropped hits.\nMeasured average current per unit is within 20% of the calculated power budget (≈180 mA)."
+  },
+  {
+    "objectID": "projectSpecs.html#midpoint-specifications",
+    "href": "projectSpecs.html#midpoint-specifications",
+    "title": "Project Proposal Specs",
+    "section": "Midpoint Specifications",
+    "text": "Midpoint Specifications\nMidpoint requirements follow the course’s Project Midpoint Specifications."
+  },
+  {
+    "objectID": "projectSpecs.html#checkoff-specifications",
+    "href": "projectSpecs.html#checkoff-specifications",
+    "title": "Project Proposal Specs",
+    "section": "Checkoff Specifications",
+    "text": "Checkoff Specifications\nFinal checkoff requirements follow the course’s Project Checkoff Specifications."
+  },
+  {
+    "objectID": "projectSpecs.html#final-report-specifications",
+    "href": "projectSpecs.html#final-report-specifications",
+    "title": "Project Proposal Specs",
+    "section": "Final Report Specifications",
+    "text": "Final Report Specifications\nFinal report requirements follow the course’s Project Final Report Specifications."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "E155 Final Project",
@@ -56,17 +119,66 @@
     "text": "We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board (iCE40 UP5K FPGA + STM32L432KC MCU). Pulling the trigger fires a coded IR packet; when another player’s receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard."
   },
   {
-    "objectID": "projectSpecs.html",
-    "href": "projectSpecs.html",
-    "title": "Project Proposal Specs",
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "Project Proposal",
     "section": "",
-    "text": "Bill of materials included with list of all items needed for the project\nProject lists specifications for design\nIdentifies the riskiest element of the project\n\n\n\n\n\nBill of materials includes part numbers, quantities, and prices for all components including shipping and taxes. Prices for components available in the stock room should be indicated as “stockroom”.\nCompletely clear what the project must do to meet specs.\nRough timeline included which lists the tasks which need to be completed, the order in which they will be pursued, the time they are expected to take, and how the tasks will be divided among the team members.\nCalculation of performance critical parameters is present.\nWriting is well organized and no grammar or spelling issues."
+    "text": "We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board (iCE40 UP5K FPGA + STM32L432KC MCU). Pulling the trigger fires a coded IR packet; when another player’s receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard.\n\n\n\nEach player unit contains the following:\n\nBlaster: a 940 nm IR LED behind a focusing lens, driven at a 38 kHz carrier, plus a push-button trigger.\nTarget: two IR receivers in the baseline (front and back), expandable to six (chest, back, both shoulders) so hits can be scored by body segment.\nFeedback: indicator LEDs showing a hit, a speaker for hit as well as win/lose sound effects.\nConnectivity: an ESP8266 that streams hit events to a laptop running a polling scoreboard web page.\nEnclosure: a 3D-printed housing and straps, powered by a portable battery so players can move freely.\n\n\n\n\nThe project exercises the core course concepts:\n\nLED display driving (Lab 1)\nInput synchronization (Lab 3)\nTimer-driven audio (Lab 4)\nInterrupts (Lab 5)\nIoT streaming (Lab 6)\n\nThe new hardware is the IR transmit/receive chain; the new FPGA content is SPRAM-backed display patterns; the new MCU content is DAC-based audio."
   },
   {
-    "objectID": "projectSpecs.html#general",
-    "href": "projectSpecs.html#general",
-    "title": "Project Proposal Specs",
+    "objectID": "proposal.html#project-description",
+    "href": "proposal.html#project-description",
+    "title": "Project Proposal",
     "section": "",
-    "text": "Bill of materials included with list of all items needed for the project\nProject lists specifications for design\nIdentifies the riskiest element of the project\n\n\n\n\n\nBill of materials includes part numbers, quantities, and prices for all components including shipping and taxes. Prices for components available in the stock room should be indicated as “stockroom”.\nCompletely clear what the project must do to meet specs.\nRough timeline included which lists the tasks which need to be completed, the order in which they will be pursued, the time they are expected to take, and how the tasks will be divided among the team members.\nCalculation of performance critical parameters is present.\nWriting is well organized and no grammar or spelling issues."
+    "text": "We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board (iCE40 UP5K FPGA + STM32L432KC MCU). Pulling the trigger fires a coded IR packet; when another player’s receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard.\n\n\n\nEach player unit contains the following:\n\nBlaster: a 940 nm IR LED behind a focusing lens, driven at a 38 kHz carrier, plus a push-button trigger.\nTarget: two IR receivers in the baseline (front and back), expandable to six (chest, back, both shoulders) so hits can be scored by body segment.\nFeedback: indicator LEDs showing a hit, a speaker for hit as well as win/lose sound effects.\nConnectivity: an ESP8266 that streams hit events to a laptop running a polling scoreboard web page.\nEnclosure: a 3D-printed housing and straps, powered by a portable battery so players can move freely.\n\n\n\n\nThe project exercises the core course concepts:\n\nLED display driving (Lab 1)\nInput synchronization (Lab 3)\nTimer-driven audio (Lab 4)\nInterrupts (Lab 5)\nIoT streaming (Lab 6)\n\nThe new hardware is the IR transmit/receive chain; the new FPGA content is SPRAM-backed display patterns; the new MCU content is DAC-based audio."
+  },
+  {
+    "objectID": "proposal.html#fpga-design-details",
+    "href": "proposal.html#fpga-design-details",
+    "title": "Project Proposal",
+    "section": "FPGA Design Details",
+    "text": "FPGA Design Details"
+  },
+  {
+    "objectID": "proposal.html#mcu-design-details",
+    "href": "proposal.html#mcu-design-details",
+    "title": "Project Proposal",
+    "section": "MCU Design Details",
+    "text": "MCU Design Details"
+  },
+  {
+    "objectID": "proposal.html#performance-parameters",
+    "href": "proposal.html#performance-parameters",
+    "title": "Project Proposal",
+    "section": "Performance Parameters",
+    "text": "Performance Parameters"
+  },
+  {
+    "objectID": "proposal.html#system-diagram",
+    "href": "proposal.html#system-diagram",
+    "title": "Project Proposal",
+    "section": "System Diagram",
+    "text": "System Diagram"
+  },
+  {
+    "objectID": "proposal.html#projected-timeline",
+    "href": "proposal.html#projected-timeline",
+    "title": "Project Proposal",
+    "section": "Projected Timeline",
+    "text": "Projected Timeline\nGantt Chart: Laser Tag"
+  },
+  {
+    "objectID": "proposal.html#bill-of-materials",
+    "href": "proposal.html#bill-of-materials",
+    "title": "Project Proposal",
+    "section": "Bill of Materials",
+    "text": "Bill of Materials\nBill of Materials: Laser Tag"
+  },
+  {
+    "objectID": "proposal.html#project-specifications",
+    "href": "proposal.html#project-specifications",
+    "title": "Project Proposal",
+    "section": "Project Specifications",
+    "text": "Project Specifications"
   }
 ]

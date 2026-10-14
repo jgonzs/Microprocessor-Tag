@@ -95,6 +95,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./proposal.html"> 
+<span class="menu-text">Project Proposal</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link active" href="./projectSpecs.html" aria-current="page"> 
 <span class="menu-text">Proposal Specs</span></a>
   </li>  
@@ -138,11 +142,34 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#general" id="toc-general" class="nav-link active" data-scroll-target="#general">General</a>
+  <li><a href="#ir-implementation" id="toc-ir-implementation" class="nav-link active" data-scroll-target="#ir-implementation">IR Implementation</a>
   <ul class="collapse">
   <li><a href="#proficiency" id="toc-proficiency" class="nav-link" data-scroll-target="#proficiency">Proficiency</a></li>
   <li><a href="#excellence" id="toc-excellence" class="nav-link" data-scroll-target="#excellence">Excellence</a></li>
   </ul></li>
+  <li><a href="#game-logic-and-data" id="toc-game-logic-and-data" class="nav-link" data-scroll-target="#game-logic-and-data">Game Logic and Data</a>
+  <ul class="collapse">
+  <li><a href="#proficiency-1" id="toc-proficiency-1" class="nav-link" data-scroll-target="#proficiency-1">Proficiency</a></li>
+  <li><a href="#excellence-1" id="toc-excellence-1" class="nav-link" data-scroll-target="#excellence-1">Excellence</a></li>
+  </ul></li>
+  <li><a href="#display-and-audio-feedback" id="toc-display-and-audio-feedback" class="nav-link" data-scroll-target="#display-and-audio-feedback">Display and Audio Feedback</a>
+  <ul class="collapse">
+  <li><a href="#proficiency-2" id="toc-proficiency-2" class="nav-link" data-scroll-target="#proficiency-2">Proficiency</a></li>
+  <li><a href="#excellence-2" id="toc-excellence-2" class="nav-link" data-scroll-target="#excellence-2">Excellence</a></li>
+  </ul></li>
+  <li><a href="#web-server-and-scoreboard" id="toc-web-server-and-scoreboard" class="nav-link" data-scroll-target="#web-server-and-scoreboard">Web Server and Scoreboard</a>
+  <ul class="collapse">
+  <li><a href="#proficiency-3" id="toc-proficiency-3" class="nav-link" data-scroll-target="#proficiency-3">Proficiency</a></li>
+  <li><a href="#excellence-3" id="toc-excellence-3" class="nav-link" data-scroll-target="#excellence-3">Excellence</a></li>
+  </ul></li>
+  <li><a href="#hardware-and-power" id="toc-hardware-and-power" class="nav-link" data-scroll-target="#hardware-and-power">Hardware and Power</a>
+  <ul class="collapse">
+  <li><a href="#proficiency-4" id="toc-proficiency-4" class="nav-link" data-scroll-target="#proficiency-4">Proficiency</a></li>
+  <li><a href="#excellence-4" id="toc-excellence-4" class="nav-link" data-scroll-target="#excellence-4">Excellence</a></li>
+  </ul></li>
+  <li><a href="#midpoint-specifications" id="toc-midpoint-specifications" class="nav-link" data-scroll-target="#midpoint-specifications">Midpoint Specifications</a></li>
+  <li><a href="#checkoff-specifications" id="toc-checkoff-specifications" class="nav-link" data-scroll-target="#checkoff-specifications">Checkoff Specifications</a></li>
+  <li><a href="#final-report-specifications" id="toc-final-report-specifications" class="nav-link" data-scroll-target="#final-report-specifications">Final Report Specifications</a></li>
   </ul>
 </nav>
     </div>
@@ -168,28 +195,115 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="general" class="level2">
-<h2 class="anchored" data-anchor-id="general">General</h2>
+<section id="ir-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="ir-implementation">IR Implementation</h2>
 <section id="proficiency" class="level3">
 <h3 class="anchored" data-anchor-id="proficiency">Proficiency</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">Bill of materials included with list of all items needed for the project</label></li>
-<li><label><input type="checkbox">Project lists specifications for design</label></li>
-<li><label><input type="checkbox">Identifies the riskiest element of the project</label></li>
+<li><label><input type="checkbox">Each player unit fires a coded IR packet when the trigger is pressed.</label></li>
+<li><label><input type="checkbox">FPGA generates a 38 kHz ± 2% IR carrier, verified with an oscilloscope capture.</label></li>
+<li><label><input type="checkbox">A player unit registers a hit on its single hit zone when struck by the other player’s blaster from at least 5 m indoors.</label></li>
+<li><label><input type="checkbox">IR receiver input is passed through a synchronizer before being decoded on the FPGA.</label></li>
+<li><label><input type="checkbox">IR decoder rejects packets with invalid timing or check bits.</label></li>
+<li><label><input type="checkbox">Hits are not registered from a player’s own shots or from stray IR sources (e.g., a TV remote).</label></li>
+<li><label><input type="checkbox">IR decoder testbench passes, verifying valid and invalid packets.</label></li>
 </ul>
 </section>
 <section id="excellence" class="level3">
 <h3 class="anchored" data-anchor-id="excellence">Excellence</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">Bill of materials includes part numbers, quantities, and prices for all components including shipping and taxes. Prices for components available in the stock room should be indicated as “stockroom”.</label></li>
-<li><label><input type="checkbox">Completely clear what the project must do to meet specs.</label></li>
-<li><label><input type="checkbox">Rough timeline included which lists the tasks which need to be completed, the order in which they will be pursued, the time they are expected to take, and how the tasks will be divided among the team members.</label></li>
-<li><label><input type="checkbox">Calculation of performance critical parameters is present.</label></li>
-<li><label><input type="checkbox">Writing is well organized and no grammar or spelling issues.</label></li>
+<li><label><input type="checkbox">Each player unit has three hit zones, and the FPGA decodes all three IR receivers in parallel.</label></li>
+<li><label><input type="checkbox">Hits register from at least 10 m indoors.</label></li>
+<li><label><input type="checkbox">Decoder testbench covers the edges of the timing acceptance window and simultaneous packets on multiple receivers.</label></li>
 </ul>
-
-
 </section>
+</section>
+<section id="game-logic-and-data" class="level2">
+<h2 class="anchored" data-anchor-id="game-logic-and-data">Game Logic and Data</h2>
+<section id="proficiency-1" class="level3">
+<h3 class="anchored" data-anchor-id="proficiency-1">Proficiency</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Game progresses through start, play, out, and game over states, with a reset returning both units to start.</label></li>
+<li><label><input type="checkbox">A valid hit decrements the hit player’s health.</label></li>
+<li><label><input type="checkbox">SPI interconnect between the MCU and FPGA is wired correctly and transfers hit events (shooter ID, zone) and game state.</label></li>
+<li><label><input type="checkbox">MCU handles hit events with an interrupt rather than polling.</label></li>
+</ul>
+</section>
+<section id="excellence-1" class="level3">
+<h3 class="anchored" data-anchor-id="excellence-1">Excellence</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Hits are scored by zone.</label></li>
+<li><label><input type="checkbox">SPI communication between the MCU and FPGA is displayed on the logic analyzer.</label></li>
+<li><label><input type="checkbox">Finite state machines are implemented in an appropriate form discussed in lecture: canonical, non-canonical, or communicating.</label></li>
+</ul>
+</section>
+</section>
+<section id="display-and-audio-feedback" class="level2">
+<h2 class="anchored" data-anchor-id="display-and-audio-feedback">Display and Audio Feedback</h2>
+<section id="proficiency-2" class="level3">
+<h3 class="anchored" data-anchor-id="proficiency-2">Proficiency</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Indicator LEDs show each player’s health and game state, and flash on a valid hit.</label></li>
+<li><label><input type="checkbox">Win/lose is shown on each unit at game over.</label></li>
+<li><label><input type="checkbox">MCU plays sampled sound effects through its DAC, with sample timing driven by a hardware timer.</label></li>
+<li><label><input type="checkbox">A hit sound effect plays on each valid hit.</label></li>
+</ul>
+</section>
+<section id="excellence-2" class="level3">
+<h3 class="anchored" data-anchor-id="excellence-2">Excellence</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">LED display animations are stored in SPRAM and played back on command from the MCU.</label></li>
+<li><label><input type="checkbox">Distinct sound effects play for firing, hits, and win/lose.</label></li>
+</ul>
+</section>
+</section>
+<section id="web-server-and-scoreboard" class="level2">
+<h2 class="anchored" data-anchor-id="web-server-and-scoreboard">Web Server and Scoreboard</h2>
+<section id="proficiency-3" class="level3">
+<h3 class="anchored" data-anchor-id="proficiency-3">Proficiency</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">MCU sends hit events to the ESP8266 over UART, and the ESP8266 delivers them to the laptop server.</label></li>
+<li><label><input type="checkbox">Laptop server logs hit events from both player units.</label></li>
+</ul>
+</section>
+<section id="excellence-3" class="level3">
+<h3 class="anchored" data-anchor-id="excellence-3">Excellence</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Scoreboard web page displays each player’s health, hits by zone, and win/lose, updating within 1 s of a hit.</label></li>
+<li><label><input type="checkbox">Games can be started and reset from the scoreboard web page.</label></li>
+</ul>
+</section>
+</section>
+<section id="hardware-and-power" class="level2">
+<h2 class="anchored" data-anchor-id="hardware-and-power">Hardware and Power</h2>
+<section id="proficiency-4" class="level3">
+<h3 class="anchored" data-anchor-id="proficiency-4">Proficiency</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Both units run untethered on battery power inside 3D-printed housings with straps.</label></li>
+<li><label><input type="checkbox">Logic is broken into modules (e.g., IR transmitter, IR decoder, SPI peripheral, LED driver), with control logic separate from datapath logic.</label></li>
+</ul>
+</section>
+<section id="excellence-4" class="level3">
+<h3 class="anchored" data-anchor-id="excellence-4">Excellence</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">A full 15-minute two-player game runs on battery without resets or dropped hits.</label></li>
+<li><label><input type="checkbox">Measured average current per unit is within 20% of the calculated power budget (≈180 mA).</label></li>
+</ul>
+</section>
+</section>
+<section id="midpoint-specifications" class="level2">
+<h2 class="anchored" data-anchor-id="midpoint-specifications">Midpoint Specifications</h2>
+<p>Midpoint requirements follow the course’s <a href="https://hmc-e155.github.io/project/specs/project-midpoint-specs.html">Project Midpoint Specifications</a>.</p>
+</section>
+<section id="checkoff-specifications" class="level2">
+<h2 class="anchored" data-anchor-id="checkoff-specifications">Checkoff Specifications</h2>
+<p>Final checkoff requirements follow the course’s <a href="https://hmc-e155.github.io/project/specs/project-checkoff-specs.html">Project Checkoff Specifications</a>.</p>
+</section>
+<section id="final-report-specifications" class="level2">
+<h2 class="anchored" data-anchor-id="final-report-specifications">Final Report Specifications</h2>
+<p>Final report requirements follow the course’s <a href="https://hmc-e155.github.io/project/specs/project-final-report-specs.html">Project Final Report Specifications</a>.</p>
+
+
 </section>
 
 </main> <!-- /main -->
