@@ -123,14 +123,14 @@
     "href": "proposal.html",
     "title": "Project Proposal",
     "section": "",
-    "text": "We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board. Pulling the trigger fires a coded IR packet; when another player’s receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard.\n\n\n\nEach player unit contains the following:\n\nBlaster: a 940 nm IR LED behind a focusing lens, driven at a 38 kHz carrier, plus a push-button trigger.\nTarget: two IR receivers in the baseline (front and back), expandable to six (chest, back, both shoulders) so hits can be scored by body segment.\nFeedback: indicator LEDs showing a hit, a speaker for hit as well as win/lose sound effects.\nConnectivity: an ESP8266 that streams hit events to a laptop running a polling scoreboard web page.\nEnclosure: a 3D-printed housing and straps, powered by a portable battery so players can move freely."
+    "text": "We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board. Pulling the trigger fires a coded IR packet; when another player’s receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard."
   },
   {
     "objectID": "proposal.html#project-description",
     "href": "proposal.html#project-description",
     "title": "Project Proposal",
     "section": "",
-    "text": "We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board. Pulling the trigger fires a coded IR packet; when another player’s receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard.\n\n\n\nEach player unit contains the following:\n\nBlaster: a 940 nm IR LED behind a focusing lens, driven at a 38 kHz carrier, plus a push-button trigger.\nTarget: two IR receivers in the baseline (front and back), expandable to six (chest, back, both shoulders) so hits can be scored by body segment.\nFeedback: indicator LEDs showing a hit, a speaker for hit as well as win/lose sound effects.\nConnectivity: an ESP8266 that streams hit events to a laptop running a polling scoreboard web page.\nEnclosure: a 3D-printed housing and straps, powered by a portable battery so players can move freely."
+    "text": "We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board. Pulling the trigger fires a coded IR packet; when another player’s receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard."
   },
   {
     "objectID": "proposal.html#fpga-design-details",
@@ -151,14 +151,7 @@
     "href": "proposal.html#performance-parameters",
     "title": "Project Proposal",
     "section": "Performance Parameters",
-    "text": "Performance Parameters\nIR packet: 8 bits: a 4-bit shooter ID followed by its bitwise inverse as an error check. Damage is not sent; the target works it out from which receiver was hit. The timing is modeled on Sony’s SIRC remote protocol, with a base time unit of T = 600 µs:\n\nStart burst: 2.4 ms mark, then a 0.6 ms space.\nA 0 bit is a 0.6 ms mark and a 1 bit is a 1.2 ms mark; each is followed by a 0.6 ms space.\nA worst-case packet takes 2.4 + 0.6 + 8 × 1.8 = 17.4 ms.\nThe shortest mark is 0.6 ms ≈ 23 carrier cycles, above the roughly 10-cycle minimum burst that 38 kHz receivers require.\n\n\n\n\n\n\n\n\n\nParameter\nCalculation\nValue\n\n\n\n\nCarrier divider\n48 MHz / 38 kHz\n1263 (38.005 kHz, 0.01% error)\n\n\nMax fire rate\n250 ms cooldown ≫ 17.4 ms packet\n4 shots/s\n\n\nAudio timer reload\n80 MHz / 16 kHz\n5000\n\n\nAudio storage\n16 kHz × 1 B × 1 s × 3 effects\n48 KB of 256 KB flash\n\n\nUART hit message\n32 B × 10 bits / 115200 baud\n2.8 ms\n\n\nLED animation\n8 LEDs × 50 frames/s × 2 s\n100 B of 128 KB SPRAM\n\n\nBattery life\n~200 mA (board + ESP8266) from 5000 mAh pack\n~25 h\n\n\n\nRiskiest element: IR range and decoding reliability under ambient light, where sunlight and fluorescent lighting can cause false or missed hits. We will bench-test the transmit/receive chain at several distances first, before building the rest of the system."
-  },
-  {
-    "objectID": "proposal.html#system-diagram",
-    "href": "proposal.html#system-diagram",
-    "title": "Project Proposal",
-    "section": "System Diagram",
-    "text": "System Diagram\n\n\n\n\n\nflowchart LR\n  BTN[Trigger button] --&gt;|GPIO / EXTI| MCU\n  subgraph Board[E155 Board]\n    MCU[STM32L432KC]\n    FPGA[iCE40 UP5K]\n    MCU &lt;--&gt;|SPI| FPGA\n    FPGA --&gt;|hit IRQ| MCU\n  end\n  FPGA --&gt;|38 kHz PWM via transistor| IRLED[940 nm IR LED]\n  RX[IR receivers x2-6] --&gt;|demodulated digital| FPGA\n  FPGA --&gt;|GPIO| LEDS[Indicator LEDs]\n  MCU --&gt;|DAC| AMP[LM386 amp] --&gt; SPK[Speaker]\n  MCU &lt;--&gt;|UART 115200| ESP[ESP8266]\n  ESP &lt;--&gt;|Wi-Fi / HTTP| LAP[Laptop scoreboard]"
+    "text": "Performance Parameters"
   },
   {
     "objectID": "proposal.html#projected-timeline",
@@ -179,6 +172,6 @@
     "href": "proposal.html#project-specifications",
     "title": "Project Proposal",
     "section": "Project Specifications",
-    "text": "Project Specifications\n\nA shot registers as a hit at 5 m or more indoors and is never mistaken for the shooter’s own shot.\nThe hit is shown on the LEDs and with a sound within 100 ms of the receiver decoding it.\nThe scoreboard updates within 1 s of a hit and shows which body segment was hit.\nThe win/lose sound and LED pattern play when a player’s health reaches zero.\nEach unit runs at least 1 hour on battery while untethered.\n\nProject Proposal Specs"
+    "text": "Project Specifications\nProject Proposal Specs"
   }
 ]

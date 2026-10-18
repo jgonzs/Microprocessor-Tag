@@ -68,9 +68,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -148,12 +145,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#project-description" id="toc-project-description" class="nav-link active" data-scroll-target="#project-description">Project Description</a>
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#player-unit" id="toc-player-unit" class="nav-link" data-scroll-target="#player-unit">Player Unit</a></li>
   </ul></li>
   <li><a href="#fpga-design-details" id="toc-fpga-design-details" class="nav-link" data-scroll-target="#fpga-design-details">FPGA Design Details</a></li>
   <li><a href="#mcu-design-details" id="toc-mcu-design-details" class="nav-link" data-scroll-target="#mcu-design-details">MCU Design Details</a></li>
   <li><a href="#performance-parameters" id="toc-performance-parameters" class="nav-link" data-scroll-target="#performance-parameters">Performance Parameters</a></li>
-  <li><a href="#system-diagram" id="toc-system-diagram" class="nav-link" data-scroll-target="#system-diagram">System Diagram</a></li>
   <li><a href="#projected-timeline" id="toc-projected-timeline" class="nav-link" data-scroll-target="#projected-timeline">Projected Timeline</a></li>
   <li><a href="#bill-of-materials" id="toc-bill-of-materials" class="nav-link" data-scroll-target="#bill-of-materials">Bill of Materials</a></li>
   <li><a href="#project-specifications" id="toc-project-specifications" class="nav-link" data-scroll-target="#project-specifications">Project Specifications</a></li>
@@ -188,17 +183,6 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="overview">Overview</h3>
 <p>We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board. Pulling the trigger fires a coded IR packet; when another player’s receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard.</p>
 </section>
-<section id="player-unit" class="level3">
-<h3 class="anchored" data-anchor-id="player-unit">Player Unit</h3>
-<p>Each player unit contains the following:</p>
-<ul>
-<li><strong>Blaster:</strong> a 940 nm IR LED behind a focusing lens, driven at a 38 kHz carrier, plus a push-button trigger.</li>
-<li><strong>Target:</strong> two IR receivers in the baseline (front and back), expandable to six (chest, back, both shoulders) so hits can be scored by body segment.</li>
-<li><strong>Feedback:</strong> indicator LEDs showing a hit, a speaker for hit as well as win/lose sound effects.</li>
-<li><strong>Connectivity:</strong> an ESP8266 that streams hit events to a laptop running a polling scoreboard web page.</li>
-<li><strong>Enclosure:</strong> a 3D-printed housing and straps, powered by a portable battery so players can move freely.</li>
-</ul>
-</section>
 </section>
 <section id="fpga-design-details" class="level2">
 <h2 class="anchored" data-anchor-id="fpga-design-details">FPGA Design Details</h2>
@@ -221,93 +205,6 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="performance-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="performance-parameters">Performance Parameters</h2>
-<p><strong>IR packet:</strong> 8 bits: a 4-bit shooter ID followed by its bitwise inverse as an error check. Damage is not sent; the target works it out from which receiver was hit. The timing is modeled on Sony’s SIRC remote protocol, with a base time unit of T = 600 µs:</p>
-<ul>
-<li>Start burst: 2.4 ms mark, then a 0.6 ms space.</li>
-<li>A 0 bit is a 0.6 ms mark and a 1 bit is a 1.2 ms mark; each is followed by a 0.6 ms space.</li>
-<li>A worst-case packet takes 2.4 + 0.6 + 8 × 1.8 = <strong>17.4 ms</strong>.</li>
-<li>The shortest mark is 0.6 ms ≈ 23 carrier cycles, above the roughly 10-cycle minimum burst that 38 kHz receivers require.</li>
-</ul>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Calculation</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Carrier divider</td>
-<td>48 MHz / 38 kHz</td>
-<td>1263 (38.005 kHz, 0.01% error)</td>
-</tr>
-<tr class="even">
-<td>Max fire rate</td>
-<td>250 ms cooldown ≫ 17.4 ms packet</td>
-<td>4 shots/s</td>
-</tr>
-<tr class="odd">
-<td>Audio timer reload</td>
-<td>80 MHz / 16 kHz</td>
-<td>5000</td>
-</tr>
-<tr class="even">
-<td>Audio storage</td>
-<td>16 kHz × 1 B × 1 s × 3 effects</td>
-<td>48 KB of 256 KB flash</td>
-</tr>
-<tr class="odd">
-<td>UART hit message</td>
-<td>32 B × 10 bits / 115200 baud</td>
-<td>2.8 ms</td>
-</tr>
-<tr class="even">
-<td>LED animation</td>
-<td>8 LEDs × 50 frames/s × 2 s</td>
-<td>100 B of 128 KB SPRAM</td>
-</tr>
-<tr class="odd">
-<td>Battery life</td>
-<td>~200 mA (board + ESP8266) from 5000 mAh pack</td>
-<td>~25 h</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Riskiest element:</strong> IR range and decoding reliability under ambient light, where sunlight and fluorescent lighting can cause false or missed hits. We will bench-test the transmit/receive chain at several distances first, before building the rest of the system.</p>
-</section>
-<section id="system-diagram" class="level2">
-<h2 class="anchored" data-anchor-id="system-diagram">System Diagram</h2>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  BTN[Trigger button] --&gt;|GPIO / EXTI| MCU
-  subgraph Board[E155 Board]
-    MCU[STM32L432KC]
-    FPGA[iCE40 UP5K]
-    MCU &lt;--&gt;|SPI| FPGA
-    FPGA --&gt;|hit IRQ| MCU
-  end
-  FPGA --&gt;|38 kHz PWM via transistor| IRLED[940 nm IR LED]
-  RX[IR receivers x2-6] --&gt;|demodulated digital| FPGA
-  FPGA --&gt;|GPIO| LEDS[Indicator LEDs]
-  MCU --&gt;|DAC| AMP[LM386 amp] --&gt; SPK[Speaker]
-  MCU &lt;--&gt;|UART 115200| ESP[ESP8266]
-  ESP &lt;--&gt;|Wi-Fi / HTTP| LAP[Laptop scoreboard]
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
 </section>
 <section id="projected-timeline" class="level2">
 <h2 class="anchored" data-anchor-id="projected-timeline">Projected Timeline</h2>
@@ -319,13 +216,6 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="project-specifications" class="level2">
 <h2 class="anchored" data-anchor-id="project-specifications">Project Specifications</h2>
-<ul>
-<li>A shot registers as a hit at 5 m or more indoors and is never mistaken for the shooter’s own shot.</li>
-<li>The hit is shown on the LEDs and with a sound within 100 ms of the receiver decoding it.</li>
-<li>The scoreboard updates within 1 s of a hit and shows which body segment was hit.</li>
-<li>The win/lose sound and LED pattern play when a player’s health reaches zero.</li>
-<li>Each unit runs at least 1 hour on battery while untethered.</li>
-</ul>
 <p><a href="./projectSpecs.html" target="_blank">Project Proposal Specs</a></p>
 
 
