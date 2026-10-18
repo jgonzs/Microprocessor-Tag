@@ -6,7 +6,7 @@ title: "Project Proposal"
 
 ### Overview
 
-We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board (iCE40 UP5K FPGA + STM32L432KC MCU). Pulling the trigger fires a coded IR packet; when another player's receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard.
+We will build a two-player infrared laser tag system in which each player carries a blaster and a wearable target, both driven by one E155 development board. Pulling the trigger fires a coded IR packet; when another player's receivers decode it, their unit registers a hit, flashes its LEDs, plays a sound effect, and reports the hit over Wi-Fi to a laptop scoreboard.
 
 ### Player Unit
 
@@ -18,25 +18,62 @@ Each player unit contains the following:
 - **Connectivity:** an ESP8266 that streams hit events to a laptop running a polling scoreboard web page.
 - **Enclosure:** a 3D-printed housing and straps, powered by a portable battery so players can move freely.
 
-### Relevance to Microprocessors
-
-The project exercises the core course concepts:
-
-- LED display driving (Lab 1)
-- Input synchronization (Lab 3)
-- Timer-driven audio (Lab 4)
-- Interrupts (Lab 5)
-- IoT streaming (Lab 6)
-
-The new hardware is the IR transmit/receive chain; the new FPGA content is SPRAM-backed display patterns; the new MCU content is DAC-based audio.
-
 ## FPGA Design Details
+
+The FPGA handles everything that needs precise timing:
+
+- **IR transmitter:** divides the 48 MHz internal oscillator down to a 38 kHz carrier. When the MCU sends a fire command over SPI, a packet encoder FSM gates the carrier into marks and spaces and drives the IR LED through a transistor.
+- **IR receiver decoder:** each receiver output passes through a two-flop synchronizer into a pulse-width FSM. The FSM detects the start burst, decodes the bits, and checks that the second half of the packet is the inverse of the first. A valid packet is latched together with the index of the receiver that caught it, and an interrupt line to the MCU is raised.
+- **LED pattern engine:** hit/win/lose animations are stored in single-port RAM (SPRAM) and played back at a fixed frame rate. The MCU picks the pattern over SPI. (SPRAM is not used in any lab.)
 
 ## MCU Design Details
 
+The MCU runs the game logic, audio, and communication:
+
+- **Trigger:** the push button is a GPIO input with an external interrupt (EXTI), debounced with a timer. A cooldown limits the fire rate.
+- **SPI master to FPGA:** sends fire and pattern commands. On the FPGA's interrupt line, the MCU reads the hit packet and the receiver index and ignores its own player ID. Damage depends on which receiver was hit (for example, more for chest or back than for a shoulder) and is subtracted from health.
+- **Audio:** a basic timer (TIM6) triggers the on-chip digital-to-analog converter (DAC) through DMA at 16 kHz, playing 8-bit sound samples stored in flash. The output goes through an LM386 amplifier to the speaker. (The DAC is not used in any lab.)
+- **Wi-Fi:** UART at 115200 baud to the ESP8266. Hit events go out to the scoreboard. When one player's health reaches zero, the scoreboard sends a game-over message back so the other unit plays its win sound.
+
 ## Performance Parameters
 
+**IR packet:** 8 bits: a 4-bit shooter ID followed by its bitwise inverse as an error check. Damage is not sent; the target works it out from which receiver was hit. The timing is modeled on Sony's SIRC remote protocol, with a base time unit of T = 600 µs:
+
+- Start burst: 2.4 ms mark, then a 0.6 ms space.
+- A 0 bit is a 0.6 ms mark and a 1 bit is a 1.2 ms mark; each is followed by a 0.6 ms space.
+- A worst-case packet takes 2.4 + 0.6 + 8 × 1.8 = **17.4 ms**.
+- The shortest mark is 0.6 ms ≈ 23 carrier cycles, above the roughly 10-cycle minimum burst that 38 kHz receivers require.
+
+| Parameter | Calculation | Value |
+|---|---|---|
+| Carrier divider | 48 MHz / 38 kHz | 1263 (38.005 kHz, 0.01% error) |
+| Max fire rate | 250 ms cooldown ≫ 17.4 ms packet | 4 shots/s |
+| Audio timer reload | 80 MHz / 16 kHz | 5000 |
+| Audio storage | 16 kHz × 1 B × 1 s × 3 effects | 48 KB of 256 KB flash |
+| UART hit message | 32 B × 10 bits / 115200 baud | 2.8 ms |
+| LED animation | 8 LEDs × 50 frames/s × 2 s | 100 B of 128 KB SPRAM |
+| Battery life | ~200 mA (board + ESP8266) from 5000 mAh pack | ~25 h |
+
+**Riskiest element:** IR range and decoding reliability under ambient light, where sunlight and fluorescent lighting can cause false or missed hits. We will bench-test the transmit/receive chain at several distances first, before building the rest of the system.
+
 ## System Diagram
+
+```{mermaid}
+flowchart LR
+  BTN[Trigger button] -->|GPIO / EXTI| MCU
+  subgraph Board[E155 Board]
+    MCU[STM32L432KC]
+    FPGA[iCE40 UP5K]
+    MCU <-->|SPI| FPGA
+    FPGA -->|hit IRQ| MCU
+  end
+  FPGA -->|38 kHz PWM via transistor| IRLED[940 nm IR LED]
+  RX[IR receivers x2-6] -->|demodulated digital| FPGA
+  FPGA -->|GPIO| LEDS[Indicator LEDs]
+  MCU -->|DAC| AMP[LM386 amp] --> SPK[Speaker]
+  MCU <-->|UART 115200| ESP[ESP8266]
+  ESP <-->|Wi-Fi / HTTP| LAP[Laptop scoreboard]
+```
 
 ## Projected Timeline
 
@@ -47,3 +84,11 @@ The new hardware is the IR transmit/receive chain; the new FPGA content is SPRAM
 [Bill of Materials: Laser Tag](https://docs.google.com/spreadsheets/d/13bRpZxdt_8ipOBhQL8Q-iVgm8mFkh8kO3NTixoq8EJ8/edit?usp=sharing)
 
 ## Project Specifications
+
+- A shot registers as a hit at 5 m or more indoors and is never mistaken for the shooter's own shot.
+- The hit is shown on the LEDs and with a sound within 100 ms of the receiver decoding it.
+- The scoreboard updates within 1 s of a hit and shows which body segment was hit.
+- The win/lose sound and LED pattern play when a player's health reaches zero.
+- Each unit runs at least 1 hour on battery while untethered.
+
+[Project Proposal Specs](projectSpecs.qmd){target="_blank"}
