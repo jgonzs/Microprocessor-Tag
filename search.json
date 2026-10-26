@@ -46,42 +46,42 @@
     "href": "projectSpecs.html",
     "title": "Project Proposal Specs",
     "section": "",
-    "text": "Each player unit fires a coded IR packet when the trigger is pressed.\nFPGA generates a 38 kHz IR carrier, verified with an oscilloscope capture.\nA player unit registers a hit on its single hit zone when struck by the other player’s blaster from at least 5 m indoors.\nIR receiver input is passed through a synchronizer before being decoded on the FPGA.\nHits are not registered from a player’s own shots or from stray IR sources (e.g., a TV remote)."
+    "text": "Pressing the trigger fires a shot, confirmed by the fire sound playing.\nA player registers a hit when shot by the other player’s blaster from at least 5 m indoors.\nA player cannot hit themselves with their own blaster.\nPointing a TV remote (or other IR source) at a player’s hit zone does not register a hit.\nNo false hits occur while both players stand idle in a lit room."
   },
   {
     "objectID": "projectSpecs.html#ir-implementation",
     "href": "projectSpecs.html#ir-implementation",
     "title": "Project Proposal Specs",
     "section": "",
-    "text": "Each player unit fires a coded IR packet when the trigger is pressed.\nFPGA generates a 38 kHz IR carrier, verified with an oscilloscope capture.\nA player unit registers a hit on its single hit zone when struck by the other player’s blaster from at least 5 m indoors.\nIR receiver input is passed through a synchronizer before being decoded on the FPGA.\nHits are not registered from a player’s own shots or from stray IR sources (e.g., a TV remote)."
+    "text": "Pressing the trigger fires a shot, confirmed by the fire sound playing.\nA player registers a hit when shot by the other player’s blaster from at least 5 m indoors.\nA player cannot hit themselves with their own blaster.\nPointing a TV remote (or other IR source) at a player’s hit zone does not register a hit.\nNo false hits occur while both players stand idle in a lit room."
   },
   {
-    "objectID": "projectSpecs.html#game-logic-and-data",
-    "href": "projectSpecs.html#game-logic-and-data",
+    "objectID": "projectSpecs.html#game-logic",
+    "href": "projectSpecs.html#game-logic",
     "title": "Project Proposal Specs",
-    "section": "Game Logic and Data",
-    "text": "Game Logic and Data\n\nExcellence\n\nGame progresses through start, play, out, and game over states, with a reset returning both units to start.\nA valid hit decrements the hit player’s health.\nSPI interconnect between the MCU and FPGA is wired correctly and transfers hit events (shooter ID) and game state.\nMCU handles hit events with an interrupt rather than polling."
+    "section": "Game Logic",
+    "text": "Game Logic\n\nEach player starts with 3 lives, shown on the scoreboard.\nEach valid hit removes exactly one life.\nPressing reset on the scoreboard returns both players to 3 lives and a new game."
   },
   {
     "objectID": "projectSpecs.html#display-and-audio-feedback",
     "href": "projectSpecs.html#display-and-audio-feedback",
     "title": "Project Proposal Specs",
     "section": "Display and Audio Feedback",
-    "text": "Display and Audio Feedback\n\nExcellence\n\nAn indicator LED flashes on a valid hit.\nMCU plays sampled sound effects through its DAC, with sample timing driven by a hardware timer.\nA hit sound effect plays on each valid hit.\nLED display animations are stored in SPRAM and played back on command from the MCU.\nDistinct sound effects play for firing, hits, and win/lose."
+    "text": "Display and Audio Feedback\n\nThe LCD display plays a hit animation on each valid hit.\nThe LCD display shows distinct animations for idle, hit, out, and win.\nDistinct sound effects play for firing, getting hit, winning, and losing.\nSound and animation play when a hit occurs."
   },
   {
     "objectID": "projectSpecs.html#web-server-and-scoreboard",
     "href": "projectSpecs.html#web-server-and-scoreboard",
     "title": "Project Proposal Specs",
     "section": "Web Server and Scoreboard",
-    "text": "Web Server and Scoreboard\n\nExcellence\n\nMCU sends hit events to the ESP8266 over UART, and the ESP8266 delivers them to the laptop server.\nLaptop server logs hit events from both player units.\nGames can be started and reset from the scoreboard web page."
+    "text": "Web Server and Scoreboard\n\nThe scoreboard web page shows each player’s remaining lives and updates with each hit.\nGames can be started and reset from the scoreboard web page.\nThe scoreboard announces the winner when the game ends."
   },
   {
     "objectID": "projectSpecs.html#hardware-and-power",
     "href": "projectSpecs.html#hardware-and-power",
     "title": "Project Proposal Specs",
     "section": "Hardware and Power",
-    "text": "Hardware and Power\n\nExcellence\n\nBoth units run untethered on battery power inside 3D-printed housings with straps.\nA full 5-minute two-player game runs on battery."
+    "text": "Hardware and Power\n\nBoth units run untethered on battery power inside 3D-printed housings with straps.\nA full 5-minute two-player game runs on battery without resets."
   },
   {
     "objectID": "projectSpecs.html#midpoint-specifications",
